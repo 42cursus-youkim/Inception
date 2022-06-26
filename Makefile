@@ -12,10 +12,11 @@ build:
 	$(COMPOSE) $(FLAGS) build
 
 up:
-	$(COMPOSE) $(FLAGS) up -d
+	$(COMPOSE) $(FLAGS) up -d --build
 
 down:
-	$(COMPOSE) $(FLAGS) down
+	$(COMPOSE) $(FLAGS) down -t 2
+# -t 0은 테스트할 때만
 
 logs:
 	$(COMPOSE) $(FLAGS) logs

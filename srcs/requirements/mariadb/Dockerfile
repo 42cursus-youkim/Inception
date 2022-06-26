@@ -5,4 +5,4 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 
 COPY tools/ /tmp/tools/
 
-ENTRYPOINT ["bash", "/tmp/test.sh"]
+ENTRYPOINT ["bash", "/tmp/tools/configure.sh"]

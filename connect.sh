@@ -1,12 +1,18 @@
 #!/bin/bash
 
 connect() {
-  docker compose --file srcs/docker-compose.yml exec $1 $2
+  echo  docker compose --file srcs/docker-compose.yml exec $1 "${@:2}"
+  docker compose --file srcs/docker-compose.yml exec $1 "${@:2}"
 }
 
 case $1 in
   mariadb | wordpress | nginx)
-    connect $1 ${2:-/bin/bash}
+    echo "which:$1, command:${@:2}"
+    if (( $# >= 2 )); then
+      connect $1 "${@:2}"
+    else
+      connect $1 /bin/bash
+    fi
     ;;
   *)
     echo "Usage: $0 (mariadb|wordpress|nginx) [command=/bin/bash]"

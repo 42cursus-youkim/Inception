@@ -1,44 +1,28 @@
-# HOST MACHINE                               WWW
-#                                            ^
-#                                           443
-# ========================================== | =======
-# DOCKER NETWORK                             |
-#                                            V
-#  Container <-3306-> Container  <-9000-> Container
-#     DB           Wordpress + PHP         NGINX
-#     ^                    ^               /
-# ====|====================| ============/ ==========
-# VOLUMES                  |            /
-#     |                    |  /--------/
-#     V                    V /
-#   Volume              Volume
-#     DB              WordPress
-#
+
 
 volumes:
   db:
   wp:
-  util:
 
 networks:
   internal:
+    driver: bridge
 
 # 기본값은 bridge
 # https://docs.docker.com/compose/compose-file/compose-file-v3/#driver-1
 
 services:
   mariadb:
-    image: alpine:3.16.0
-    build: srcs/requirements/mariadb
+    image: ${IMAGE}
     restart: always
-    tty: true
-    expose:
-      - 3306
-    volumes:
-      - db:/var/lib/mysql
-      - util:/util
+    # build: ${BUILD}/mariadb
     networks:
       - internal
+    expose:
+      - 3306
+    tty: true
+    # volumes:
+    #   - ${VOLUME}/db:/var/lib/mysql
     environment:
       DB_NAME: ${DB_NAME}
       DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -73,3 +57,4 @@ services:
   #   networks:
   #     - internal
   #   tty: true
+

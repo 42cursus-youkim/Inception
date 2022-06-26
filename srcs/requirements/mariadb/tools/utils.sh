@@ -17,3 +17,10 @@ ifnotfile() {
   ! iffile $1
   return
 }
+
+format() {
+  eval "cat <<EOF
+$@
+EOF
+" 2>/dev/null
+}
