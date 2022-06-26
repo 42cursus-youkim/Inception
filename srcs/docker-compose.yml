@@ -1,0 +1,75 @@
+# HOST MACHINE                               WWW
+#                                            ^
+#                                           443
+# ========================================== | =======
+# DOCKER NETWORK                             |
+#                                            V
+#  Container <-3306-> Container  <-9000-> Container
+#     DB           Wordpress + PHP         NGINX
+#     ^                    ^               /
+# ====|====================| ============/ ==========
+# VOLUMES                  |            /
+#     |                    |  /--------/
+#     V                    V /
+#   Volume              Volume
+#     DB              WordPress
+#
+
+volumes:
+  db:
+  wp:
+  util:
+
+networks:
+  internal:
+
+# 기본값은 bridge
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#driver-1
+
+services:
+  mariadb:
+    image: alpine:3.16.0
+    build: srcs/requirements/mariadb
+    restart: always
+    tty: true
+    expose:
+      - 3306
+    volumes:
+      - db:/var/lib/mysql
+      - util:/util
+    networks:
+      - internal
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  # wordpress:
+  #   image: alpine:3.16.0
+  #   restart: always
+  #   volumes:
+  #     - data:/var/www/html
+  #   expose:
+  #     - 9000
+  #   networks:
+  #     - internal
+  #   tty: true
+  # environment:
+  #   WP_URL: ${WP_URL}
+  #   WP_TITLE: ${WP_TITLE}
+  #   WP_ADMIN_NAME: ${WP_ADMIN_NAME}
+  #   WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+  #   WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+
+  # nginx:
+  #   image: alpine:3.16.0
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - data:/var/www/html
+  #   networks:
+  #     - internal
+  #   tty: true
