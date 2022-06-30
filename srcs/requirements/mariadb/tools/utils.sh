@@ -17,3 +17,7 @@ ifnotfile() {
   ! iffile $1
   return
 }
+
+log() {
+  echo "[-]" $@
+}

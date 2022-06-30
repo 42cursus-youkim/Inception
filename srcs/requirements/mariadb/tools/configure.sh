@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $(dirname "$0")/util.sh
+source $(dirname "$0")/utils.sh
 
 # Util
 init_database() {
@@ -17,9 +17,9 @@ init_database() {
     >/dev/null
 }
 
-
 # Main
 ifnotdir "/run/mysqld" && {
+  log creating /run/mysqld...
   mkdir -p /run/mysqld
   chown -R mysql:mysql /run/mysqld
 }
