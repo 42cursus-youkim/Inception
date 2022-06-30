@@ -1,24 +1,6 @@
-# HOST MACHINE                               WWW
-#                                            ^
-#                                           443
-# ========================================== | =======
-# DOCKER NETWORK                             |
-#                                            V
-#  Container <-3306-> Container  <-9000-> Container
-#     DB           Wordpress + PHP         NGINX
-#     ^                    ^               /
-# ====|====================| ============/ ==========
-# VOLUMES                  |            /
-#     |                    |  /--------/
-#     V                    V /
-#   Volume              Volume
-#     DB              WordPress
-#
-
 volumes:
   db:
   wp:
-  util:
 
 networks:
   internal:
@@ -36,14 +18,9 @@ services:
       - 3306
     volumes:
       - db:/var/lib/mysql
-      - util:/util
     networks:
       - internal
-    environment:
-      DB_NAME: ${DB_NAME}
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
+    env_file: "mariadb.env"
 
   # wordpress:
   #   image: alpine:3.16.0
