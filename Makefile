@@ -1,4 +1,4 @@
-include srcs/.env
+# include srcs/.env
 
 NAME := inception
 
@@ -12,7 +12,7 @@ build:
 	$(COMPOSE) $(FLAGS) build
 
 up:
-	$(COMPOSE) $(FLAGS) up -d
+	$(COMPOSE) $(FLAGS) up
 
 down:
 	$(COMPOSE) $(FLAGS) down
