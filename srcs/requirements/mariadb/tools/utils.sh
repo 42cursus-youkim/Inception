@@ -21,3 +21,11 @@ ifnotfile() {
 log() {
   echo "[-]" $@
 }
+
+# 전역 변수 목록으로 문자열 치환
+subst() {
+  text=$(<$1)
+  eval "cat <<EOF
+  $text
+EOF"
+}

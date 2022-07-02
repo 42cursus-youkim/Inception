@@ -15,43 +15,31 @@ init_database() {
     --user=mysql \
     --rpm \
     >/dev/null
+
+  log database initialized
+}
+
+init_query() {
+  # https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
+  # run init.sql
+  local file=${1:-'/tmp/tools/init.sql'}
+  local query=$(subst $file)
+  log created query: $query
+  /usr/bin/mysqld --user=mysql --bootstrap <$query
+  log bootstrap finished
 }
 
 # Main
-ifnotdir "/run/mysqld" && {
-  log creating /run/mysqld...
-  mkdir -p /run/mysqld
-  chown -R mysql:mysql /run/mysqld
+MYSQLD="/run/mysqld"
+ifnotdir $MYSQLD && {
+  mkdir -p $MYSQLD
+  chown -R mysql:mysql $MYSQLD
+  log created $MYSQLD
 }
 
 ifnotdir /var/lib/mysql/mysql && {
   init_database /var/lib/mysql
-
-  ifnotfile $(mktemp) && {
-    return 1
-  }
-
-  # https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
-  cat <<EOF >$tfile
-    USE mysql;
-    FLUSH PRIVILEGES;
-
-    DELETE FROM	mysql.user WHERE User='';
-    DROP DATABASE test;
-    DELETE FROM mysql.db WHERE Db='test';
-    DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-
-    ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PWD';
-
-    CREATE DATABASE $WP_DATABASE_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;
-    CREATE USER '$WP_DATABASE_USR'@'%' IDENTIFIED by '$WP_DATABASE_PWD';
-    GRANT ALL PRIVILEGES ON $WP_DATABASE_NAME.* TO '$WP_DATABASE_USR'@'%';
-
-    FLUSH PRIVILEGES;
-EOF
-  # run init.sql
-  /usr/bin/mysqld --user=mysql --bootstrap <$tfile
-  rm -f $tfile
+  init_query /tmp/tools/init.sql
 }
 
 # allow remote connections
