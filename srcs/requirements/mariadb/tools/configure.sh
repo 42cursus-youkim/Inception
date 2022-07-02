@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 source $(dirname "$0")/utils.sh
 

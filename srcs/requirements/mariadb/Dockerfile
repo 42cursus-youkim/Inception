@@ -1,8 +1,8 @@
 FROM alpine:3.16.0
 
 RUN	apk update && apk upgrade && apk add --no-cache \
-  bash mariadb mariadb-client
+  mariadb mariadb-client
 
 COPY tools/ /tmp/tools/
 
-ENTRYPOINT ["bash", "/tmp/tools/configure.sh"]
+ENTRYPOINT ["ash", "/tmp/tools/configure.sh"]
