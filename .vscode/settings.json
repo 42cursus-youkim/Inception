@@ -1,0 +1,7 @@
+{
+  "conventionalCommits.promptFooter": false,
+  "conventionalCommits.promptScopes": false,
+  "conventionalCommits.promptBody": false,
+  "conventionalCommits.silentAutoCommit": false,
+  "conventionalCommits.autoCommit": true
+}
