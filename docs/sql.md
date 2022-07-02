@@ -8,4 +8,6 @@
 --8<-- "srcs/requirements/mariadb/tools/init.sql"
 ```
 
+[grant, revoke, role](https://nowes00.tistory.com/8)
+
 [learn sql in y minutes](https://learnxinyminutes.com/docs/sql/)
