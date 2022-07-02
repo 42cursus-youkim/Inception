@@ -24,7 +24,9 @@ init_query() {
   local file=${1:-'/tmp/tools/init.sql'}
   local query=$(subst $file)
   log created query: $query
-  /usr/bin/mysqld --user=mysql --bootstrap <<<$query
+  /usr/bin/mysqld --user=mysql --bootstrap <<EOF
+  $query
+EOF
 
   log bootstrap finished
 }
