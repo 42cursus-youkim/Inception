@@ -25,8 +25,8 @@ ps:
 
 reload: down build up
 
-clean: down
-	sudo rm -rf $(VOLUME)/*
+clean:
+	$(COMPOSE) $(FLAGS) down --volumes --remove-orphans
 
 run: reload
 
