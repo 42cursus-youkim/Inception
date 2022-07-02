@@ -2,8 +2,10 @@
 
 ## 속성 공부
 
-[learn sql in y minutes](https://learnxinyminutes.com/docs/sql/)
+## mariadb 초기화 쿼리문은 무엇을 하나
 
 ```sql
-USE mysql; -- mysql 데이터베이스를 사용
+--8<-- "srcs/requirements/mariadb/tools/init.sql"
 ```
+
+[learn sql in y minutes](https://learnxinyminutes.com/docs/sql/)
