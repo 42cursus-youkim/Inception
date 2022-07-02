@@ -8,7 +8,7 @@ connect() {
 
 case $1 in
   mariadb | wordpress | nginx)
-    connect $1 ${2:-/bin/bash}
+    connect $1 ${2:-/bin/ash}
     ;;
   *)
     echo "Usage: $0 (mariadb|wordpress|nginx) [command=/bin/bash]"
