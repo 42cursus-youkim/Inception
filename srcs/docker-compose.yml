@@ -13,6 +13,7 @@ services:
     image: alpine:3.16.0
     build: srcs/requirements/mariadb
     restart: always
+    stdin_open: true # TODO: 디버그용
     tty: true
     expose:
       - 3306
