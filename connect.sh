@@ -1,7 +1,7 @@
 #!/bin/bash
 
 connect() {
-  cmd="docker compose --file srcs/docker-compose.yml exec $1 $2"
+  cmd="docker compose --project-name inception --file srcs/docker-compose.yml exec $1 $2"
   echo $cmd
   eval $cmd
 }
