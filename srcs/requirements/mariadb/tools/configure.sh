@@ -21,12 +21,8 @@ init_database() {
 manual_install() {
   # https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
   local file=${1:-'/tmp/tools/init.sql'}
-  local query=$(subst $file | sed 's/--.*//gi' | awk 'NF')
-  # 어째서인지는 모르겠지만 주석이 들어가면 sql 쿼리에서 오류가 남. 꺄아악
-  log created query
-  cat <<EOF
-$query
-EOF
+  local query=$(subst $file | awk 'NF')
+  print_query "$query"
   /usr/bin/mysqld --user=mysql --bootstrap <<EOF
 $query
 EOF
@@ -39,9 +35,8 @@ EOF
 }
 
 # Main
-MYSQLD="/run/mysqld"
-ifnotdir $MYSQLD && {
-  mkowndir $MYSQLD mysql
+ifnotdir /run/mysqld && {
+  mkowndir /run/mysqld mysql
 }
 
 log mysqld version: $(/usr/bin/mysqld --version)
@@ -49,6 +44,8 @@ ifnotdir /var/lib/mysql/mysql && {
   init_database /var/lib/mysql
   manual_install /tmp/tools/init.sql
 }
+
+# print_tables
 
 # allow remote connections
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf

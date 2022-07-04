@@ -37,10 +37,32 @@ mkowndir() {
   fi
 }
 
+# 어째서인지는 모르겠지만 주석이 들어가면 sql 쿼리에서 오류가 남. 꺄아악
+load_query() {
+  sed 's/--.*//gi' $1
+}
+
+print_query() {
+  log created query
+  cat <<EOF
+$1
+EOF
+  log end of query
+}
+
 # 전역 변수 목록으로 문자열 치환
 subst() {
-  text=$(cat $1)
+  local text=$(load_query $1)
   eval "cat <<EOF
   $text
 EOF"
+}
+
+print_tables() {
+  local query=$(load_query ${1:-/tmp/tools/check.sql})
+  print_query "$query"
+  mysql -p${MYSQL_ROOT_PASSWORD} --table <<EOF
+$query
+EOF
+  log checked tables
 }
