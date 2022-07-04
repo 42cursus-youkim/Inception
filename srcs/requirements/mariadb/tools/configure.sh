@@ -19,16 +19,21 @@ init_database() {
   log database initialized
 }
 
-init_query() {
+manual_install() {
   # https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
   local file=${1:-'/tmp/tools/init.sql'}
-  local query=$(subst $file)
+  local query=$(subst $file | sed 's/--.*//gi')
+  # 어째서인지는 모르겠지만 주석이 들어가면 sql 쿼리에서 오류가 남. 꺄아악
   log created query: $query
   /usr/bin/mysqld --user=mysql --bootstrap <<EOF
-  $query
+$query
 EOF
-
-  log bootstrap finished
+  if [ $? -ne 0 ]; then
+    log failed to init database
+    exit 1
+  else
+    log bootstrap finished
+  fi
 }
 
 # Main
@@ -39,7 +44,7 @@ ifnotdir $MYSQLD && {
 
 ifnotdir /var/lib/mysql/mysql && {
   init_database /var/lib/mysql
-  init_query /tmp/tools/init.sql
+  manual_install /tmp/tools/init.sql
 }
 
 # allow remote connections
