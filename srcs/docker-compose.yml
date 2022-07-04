@@ -2,19 +2,18 @@ volumes:
   db:
   wp:
 
+
 networks:
   internal:
 
-# 기본값은 bridge
-# https://docs.docker.com/compose/compose-file/compose-file-v3/#driver-1
+    # 기본값은 bridge
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#driver-1
 
 services:
   mariadb:
     image: alpine:3.16.0
     build: srcs/requirements/mariadb
     restart: always
-    stdin_open: true # TODO: 디버그용
-    tty: true
     expose:
       - 3306
     volumes:
@@ -23,22 +22,18 @@ services:
       - internal
     env_file: "mariadb.env"
 
-  # wordpress:
-  #   image: alpine:3.16.0
-  #   restart: always
-  #   volumes:
-  #     - data:/var/www/html
-  #   expose:
-  #     - 9000
-  #   networks:
-  #     - internal
-  #   tty: true
-  # environment:
-  #   WP_URL: ${WP_URL}
-  #   WP_TITLE: ${WP_TITLE}
-  #   WP_ADMIN_NAME: ${WP_ADMIN_NAME}
-  #   WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
-  #   WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+  wordpress:
+    image: alpine:3.16.0
+    restart: always
+    volumes:
+      - wp:/var/www/html
+    expose:
+      - 9000
+    networks:
+      - internal
+    env_file:
+      - "mariadb.env"
+      - "wordpress.env"
 
   # nginx:
   #   image: alpine:3.16.0
