@@ -11,7 +11,7 @@ case $1 in
     connect $1 ${2:-/bin/ash}
     ;;
   *)
-    echo "Usage: $0 (mariadb|wordpress|nginx) [command=/bin/bash]"
+    echo "Usage: $0 (mariadb|wordpress|nginx) [command=/bin/ash]"
     exit 1
     ;;
 esac
