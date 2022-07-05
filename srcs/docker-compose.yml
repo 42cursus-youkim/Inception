@@ -11,7 +11,6 @@ networks:
 
 services:
   mariadb:
-    image: alpine:3.16.0
     build: srcs/requirements/mariadb
     restart: always
     expose:
@@ -23,7 +22,7 @@ services:
     env_file: "mariadb.env"
 
   wordpress:
-    image: alpine:3.16.0
+    build: srcs/requirements/wordpress
     restart: always
     volumes:
       - wp:/var/www/html
