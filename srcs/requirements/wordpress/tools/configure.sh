@@ -9,7 +9,9 @@ wait_connection() {
   echo "[-] connection success."
 }
 
-if [ ! -d '$WP_INSTALL_PATH' ]; then
+if [ ! -d $WP_INSTALL_PATH ]; then
+  echo "[-] $WP_INSTALL_PATH directory not found."
+  echo "[-] installing wordpress files"
   wp core download --path=$WP_INSTALL_PATH
   wait_connection
   wp core config \

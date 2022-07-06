@@ -14,6 +14,7 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 RUN mkdir -p /run/nginx
 
 COPY conf/nginx.conf /etc/nginx/http.d/default.conf
+COPY conf/phpfpm.conf /etc/nginx/snippets/phpfpm.conf
 
 # Start nginx
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
