@@ -13,6 +13,7 @@ RUN sed -i 's|^;cgi.fix_pathinfo=1$|cgi.fix_pathinfo=0|g' /etc/php8/php.ini
 COPY tools/configure.sh /scripts/run.sh
 RUN chmod -R 755 /scripts
 
-EXPOSE 9000
+# static website
+COPY conf/index.html /var/www/html/index.html
 
 ENTRYPOINT ["/scripts/run.sh"]

@@ -33,14 +33,15 @@ services:
     env_file:
       - "mariadb.env"
       - "wordpress.env"
-  # nginx:
-  #   image: alpine:3.16.0
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - data:/var/www/html
-  #   networks:
-  #     - internal
-  #   tty: true
+
+  nginx:
+    build: srcs/requirements/nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - internal
+    tty: true

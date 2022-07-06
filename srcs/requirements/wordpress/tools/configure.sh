@@ -21,16 +21,16 @@ while ! mariadb -h mariadb -u $DB_USER -p$DB_PASSWORD $DB_NAME; do
 done
 echo "[-] connection success."
 
-if [ ! -d '/var/www/wordpress' ]; then
-  wp core download --path=/var/www/wordpress
+if [ ! -d '/var/www/html' ]; then
+  wp core download --path=/var/www/html
   wp core config \
-    --path=/var/www/wordpress \
+    --path=/var/www/html \
     --dbhost=mariadb \
     --dbname="$DB_NAME" \
     --dbuser="$DB_USER" \
     --dbpass="$DB_PASSWORD"
   wp core install \
-    --path=/var/www/wordpress \
+    --path=/var/www/html \
     --url="$WP_URL" \
     --title="$WP_TITLE" \
     --admin_name="$WP_ADMIN_NAME" \
@@ -41,16 +41,17 @@ if [ ! -d '/var/www/wordpress' ]; then
   # wait_service_port 30 "mariadb" "mariadb" 3306
 
   # wp plugin install \
-  # --path=/var/www/wordpress redis-cache --activate
+  # --path=/var/www/html redis-cache --activate
   # wait_service_port 30 "redis" "redis" 6379
-  # wp redis enable --path=/var/www/wordpress
-  # curl -L -o /var/www/wordpress/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql-en.php
-  # sed -i "/Add any custom values between/ a define( 'WP_REDIS_HOST', 'redis' );" /var/www/wordpress/wp-config.php
+  # wp redis enable --path=/var/www/html
+  # curl -L -o /var/www/html/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql-en.php
+  # sed -i "/Add any custom values between/ a define( 'WP_REDIS_HOST', 'redis' );" /var/www/html/wp-config.php
 else
   echo "Wordpress already installed"
   # wait_service_port 30 "mariadb" "mariadb" 3306
   # wait_service_port 30 "redis" "redis" 6379
 fi
 
-echo attempting to run php-fpm...
+echo running php-fpm...
 exec php-fpm8 -F
+
