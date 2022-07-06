@@ -31,6 +31,7 @@ clean:
 run: reload
 
 expose-port:
+	echo "127.0.0.1  youkim.42.fr" >> /etc/hosts
 	echo net.ipv4.ip_unprivileged_port_start=0 >> /etc/sysctl.d/local.conf
 	sysctl --system
 

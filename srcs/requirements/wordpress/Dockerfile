@@ -16,4 +16,5 @@ RUN chmod -R 755 /scripts
 # static website
 COPY conf/index.html /var/www/html/index.html
 
+
 ENTRYPOINT ["/scripts/run.sh"]
