@@ -33,7 +33,6 @@ services:
     env_file:
       - "mariadb.env"
       - "wordpress.env"
-
   # nginx:
   #   image: alpine:3.16.0
   #   restart: always
