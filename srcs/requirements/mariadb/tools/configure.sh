@@ -52,4 +52,9 @@ sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 
 log running /usr/bin/mysqld
-exec /usr/bin/mysqld --user=mysql --console
+exec /usr/bin/mysqld \
+  --user=mysql \
+  --console \
+  --verbose \
+  --skip-name-resolve \
+  --skip_networking=0
