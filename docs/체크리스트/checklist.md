@@ -1,8 +1,8 @@
 # 목록
 
-- [x] `docker-compose` 쓰기
+- [x] [`docker-compose` 쓰기](docker-compose.md)
   - [ ] **볼륨**
-    - [ ] 위치는 `/home/login/data`
+    - [x] 위치는 `/home/login/data`
     - [ ] `WordPress DB` 볼륨
     - [ ] `WordPress 웹사이트 파일` 볼륨
 
@@ -15,7 +15,7 @@
   - [ ] 무한 루프 명령어 (`tail -f, bash, sleep infinity, while true`)로 실행이 시작되면 안됨 (entrypoint 등)
   - [ ] `PID 1`에 대해 공부하자
 
-- [ ] **서비스**
+- [ ] [**서비스**](service.md)
   - [ ] 이미지 이름이 해당하는 서비스명과 같아야댐
   - [ ] 전용 컨테이너에서 실행되야댐
   - [ ] 알파인 리눅스 두번쨰 안정판 (3.15.4) 컨테이너에서 실행되야댐
@@ -40,5 +40,19 @@
   - [ ] **MariaDB**
     - [ ] `NGINX` 없어야댐
 
-- [ ] 도메인명은 `login.42.fr`
-  - [ ] 웹사이트 주소로 리다이렉트되어야 함
+- [x] 도메인명은 `login.42.fr`
+  - [x] 웹사이트 주소로 리다이렉트되어야 함
+
+```bash
+scarf@scarf-VirtualBox:~/Repo/inception$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       scarf-VirtualBox
+127.0.0.1       youkim.42.fr
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
