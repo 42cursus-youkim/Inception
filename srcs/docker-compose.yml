@@ -1,7 +1,5 @@
 networks:
-  backend:
-    driver: bridge
-  frontend:
+  docker-network:
     driver: bridge
 
 services:
@@ -13,7 +11,7 @@ services:
     volumes:
       - ~/data/mysql:/var/lib/mysql
     networks:
-      - backend
+      - docker-network
     env_file: mariadb.env
 
   wordpress:
@@ -24,8 +22,7 @@ services:
     expose:
       - 9000
     networks:
-      - backend
-      - frontend
+      - docker-network
     env_file:
       - mariadb.env
       - wordpress.env
@@ -39,5 +36,5 @@ services:
     volumes:
       - ~/data/wp:/var/www/html
     networks:
-      - frontend
+      - docker-network
     tty: true
