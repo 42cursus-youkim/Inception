@@ -4,6 +4,7 @@ networks:
 
 services:
   mariadb:
+    container_name: mariadb
     build: srcs/requirements/mariadb
     restart: always
     expose:
@@ -15,6 +16,7 @@ services:
     env_file: mariadb.env
 
   wordpress:
+    container_name: wordpress
     build: srcs/requirements/wordpress
     restart: always
     volumes:
@@ -28,10 +30,10 @@ services:
       - wordpress.env
 
   nginx:
+    container_name: nginx
     build: srcs/requirements/nginx
     restart: always
     ports:
-      - 80:80
       - 443:443
     volumes:
       - ~/data/wp:/var/www/html
