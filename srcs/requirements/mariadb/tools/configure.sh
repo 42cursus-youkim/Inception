@@ -55,6 +55,4 @@ log running /usr/bin/mysqld
 exec /usr/bin/mysqld \
   --user=mysql \
   --console \
-  --verbose \
-  --skip-name-resolve \
-  --skip_networking=0
+  --verbose
