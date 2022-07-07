@@ -8,6 +8,8 @@ CONFIG := srcs/docker-compose.yml
 FLAGS := --project-name $(NAME) --file $(CONFIG)
 HOST := "127.0.0.1 youkim.42.fr"
 
+reload: down build up
+
 build:
 	$(COMPOSE) $(FLAGS) build
 
@@ -23,10 +25,11 @@ logs:
 ps:
 	$(COMPOSE) $(FLAGS) ps
 
-reload: down build up
-
 clean:
 	$(COMPOSE) $(FLAGS) down --volumes --remove-orphans
+
+purge:
+	rm -rf ~/data/*
 
 run: reload
 

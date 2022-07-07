@@ -11,7 +11,7 @@ services:
     expose:
       - 3306
     volumes:
-      - ~/data:/var/lib/mysql
+      - ~/data/mysql:/var/lib/mysql
     networks:
       - backend
     env_file: mariadb.env
@@ -20,7 +20,7 @@ services:
     build: srcs/requirements/wordpress
     restart: always
     volumes:
-      - ~/data:/var/www/html
+      - ~/data/wordpress:/var/www/html
     expose:
       - 9000
     networks:
@@ -37,7 +37,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ~/data:/var/www/html
+      - ~/data/wordpress:/var/www/html
     networks:
       - frontend
     tty: true

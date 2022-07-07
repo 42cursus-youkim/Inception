@@ -10,10 +10,10 @@ init_database() {
 
   # init database
   log initializing database...
-  mysql_install_db \
+  mariadb-install-db \
+    --user=mysql \
     --basedir=/usr \
-    --datadir=$DATADIR \
-    --user=mysql
+    --datadir=$DATADIR
 
   log database initialized
 }
