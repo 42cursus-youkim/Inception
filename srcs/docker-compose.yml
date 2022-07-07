@@ -1,13 +1,8 @@
-volumes:
-  db:
-  wp:
-
-
 networks:
-  internal:
-
-    # 기본값은 bridge
-    # https://docs.docker.com/compose/compose-file/compose-file-v3/#driver-1
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
 
 services:
   mariadb:
@@ -16,23 +11,24 @@ services:
     expose:
       - 3306
     volumes:
-      - db:/var/lib/mysql
+      - ~/data:/var/lib/mysql
     networks:
-      - internal
-    env_file: "mariadb.env"
+      - backend
+    env_file: mariadb.env
 
   wordpress:
     build: srcs/requirements/wordpress
     restart: always
     volumes:
-      - wp:/var/www/html
+      - ~/data:/var/www/html
     expose:
       - 9000
     networks:
-      - internal
+      - backend
+      - frontend
     env_file:
-      - "mariadb.env"
-      - "wordpress.env"
+      - mariadb.env
+      - wordpress.env
 
   nginx:
     build: srcs/requirements/nginx
@@ -41,7 +37,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - wp:/var/www/html
+      - ~/data:/var/www/html
     networks:
-      - internal
+      - frontend
     tty: true
