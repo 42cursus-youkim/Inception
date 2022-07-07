@@ -2,8 +2,8 @@
 
 # TODO: healthcheck로 바꾸기
 wait_connection() {
-  while ! mariadb -h mariadb -u $DB_USER -p$DB_PASSWORD $DB_NAME; do
-    echo "waiting..."
+  while ! mysqladmin -h mariadb -u $DB_USER -p$DB_PASSWORD status; do
+    echo "[-] waiting for connection..."
     sleep 3
   done
   echo "[-] connection success."
