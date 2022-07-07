@@ -13,32 +13,32 @@
   - [x] 컨테이너는 문제시 자동 재시작해야댐
   - [x] `tail -f` 사용 금지
   - [x] 무한 루프 명령어 (`tail -f, bash, sleep infinity, while true`)로 실행이 시작되면 안됨 (entrypoint 등)
-  - [ ] `PID 1`에 대해 공부하자
+  - [x] `PID 1`에 대해 공부하자
 
-- [ ] [**서비스**](service.md)
-  - [ ] 이미지 이름이 해당하는 서비스명과 같아야댐
-  - [ ] 전용 컨테이너에서 실행되야댐
-  - [ ] 알파인 리눅스 두번쨰 안정판 (3.15.4) 컨테이너에서 실행되야댐
-  - [ ] `Dockerfile`을 하나씩 가져야댐
-  - [ ] `NGINX`의 443 포트를 통해서만 접속이 가능해야댐 (`TLSv1.2` 또는 `TLSv1.3`으로)
+- [x] [**서비스**](service.md)
+  - [x] 이미지 이름이 해당하는 서비스명과 같아야댐
+  - [x] 전용 컨테이너에서 실행되야댐
+  - [x] 알파인 리눅스 두번쨰 안정판 (3.15.4) 컨테이너에서 실행되야댐
+  - [x] `Dockerfile`을 하나씩 가져야댐
+  - [x] `NGINX`의 443 포트를 통해서만 접속이 가능해야댐 (`TLSv1.2` 또는 `TLSv1.3`으로)
 
-  - [ ] **Dockerfile**
-    - [ ] `Makefile`에서 부른 `docker-compose.yml`에서 `Dockerfile`을 실행해야댐
-    - [ ] `Dockerfile`은 직접 작성해야댐 (예외는 `Alpine/Debian`)
-    - [ ] `latest` 태그 금지
-    - [ ] 비밀번호가 있어서는 안됨
-    - [ ] `.env`에 환경 변수 담기 추천
+  - [x] **Dockerfile**
+    - [x] `Makefile`에서 부른 `docker-compose.yml`에서 `Dockerfile`을 실행해야댐
+    - [x] `Dockerfile`은 직접 작성해야댐 (예외는 `Alpine/Debian`)
+    - [x] `latest` 태그 금지
+    - [x] 비밀번호가 있어서는 안됨
+    - [x] `.env`에 환경 변수 담기 추천
 
-  - [ ] **NGINX**
-    - [ ] `TLSv1.2` 또는 `TLSv1.3`만 있어야댐
+  - [x] **NGINX**
+    - [x] `TLSv1.2` 또는 `TLSv1.3`만 있어야댐
 
   - [ ] **WordPress + php-fpm**
-    - [ ] `NGINX` 없어야댐
+    - [x] `NGINX` 없어야댐
     - [ ] 사용자는 **2명** (일반 1명, 관리자 1명)
     - [ ] 관리자 사용자명에 `admin/Admin/administrator/Administrator`이 있어선 안댐
 
-  - [ ] **MariaDB**
-    - [ ] `NGINX` 없어야댐
+  - [x] **MariaDB**
+    - [x] `NGINX` 없어야댐
 
 - [x] 도메인명은 `login.42.fr`
   - [x] 웹사이트 주소로 리다이렉트되어야 함
@@ -57,5 +57,5 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ```
 
-- [ ] 껐다 켜도 볼륨에 정보가 남아있어야함
-  - [ ] `make reload` 해도 댓글이 남아있음
+- [x] 껐다 켜도 볼륨에 정보가 남아있어야함
+  - [x] `make reload` 해도 댓글이 남아있음
