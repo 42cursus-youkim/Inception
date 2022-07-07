@@ -4,20 +4,8 @@
 
 ### 위치는 `/home/login/data`
 ```bash
-scarf@scarf-VirtualBox:~/Repo/inception$ ls ~
-Desktop    Music     Repo       data
-Documents  Pictures  Templates  snap
-Downloads  Public    Videos
-
 scarf@scarf-VirtualBox:~/Repo/inception$ ls ~/data
-aria_log.00000001  multi-master.info
-aria_log_control   mysql
-ddl_recovery.log   mysql_upgrade_info
-e9aa800c47ab.pid   performance_schema
-ib_buffer_pool     sys
-ib_logfile0        wordpress
-ibdata1            wp
-ibtmp1
+mysql  wp
 ```
 
 ### `WordPress DB` 볼륨

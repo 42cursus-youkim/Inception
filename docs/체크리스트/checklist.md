@@ -1,18 +1,18 @@
 # 목록
 
 - [x] [`docker-compose` 쓰기](docker-compose.md)
-  - [ ] **볼륨**
+  - [x] **볼륨**
     - [x] 위치는 `/home/login/data`
-    - [ ] `WordPress DB` 볼륨
-    - [ ] `WordPress 웹사이트 파일` 볼륨
+    - [x] `WordPress DB` 볼륨
+    - [x] `WordPress 웹사이트 파일` 볼륨
 
-  - [ ] **network**
-    - [ ] `docker-network` 네트워크
-    - [ ] `network: host, --link, links:` 사용 금지
+  - [x] **network**
+    - [x] `docker-network` 네트워크
+    - [x] `network: host, --link, links:` 사용 금지
 
-  - [ ] 컨테이너는 문제시 자동 재시작해야댐
-  - [ ] `tail -f` 사용 금지
-  - [ ] 무한 루프 명령어 (`tail -f, bash, sleep infinity, while true`)로 실행이 시작되면 안됨 (entrypoint 등)
+  - [x] 컨테이너는 문제시 자동 재시작해야댐
+  - [x] `tail -f` 사용 금지
+  - [x] 무한 루프 명령어 (`tail -f, bash, sleep infinity, while true`)로 실행이 시작되면 안됨 (entrypoint 등)
   - [ ] `PID 1`에 대해 공부하자
 
 - [ ] [**서비스**](service.md)
@@ -56,3 +56,6 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ```
+
+- [ ] 껐다 켜도 볼륨에 정보가 남아있어야함
+  - [ ] `make reload` 해도 댓글이 남아있음
