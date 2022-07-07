@@ -1,4 +1,4 @@
-FROM alpine:3.16.0
+FROM alpine:3.15.4
 
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 RUN chmod +x /usr/local/bin/wp
