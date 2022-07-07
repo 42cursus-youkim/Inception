@@ -20,7 +20,7 @@ services:
     build: srcs/requirements/wordpress
     restart: always
     volumes:
-      - ~/data/wordpress:/var/www/html
+      - ~/data/wp:/var/www/html
     expose:
       - 9000
     networks:
@@ -37,7 +37,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ~/data/wordpress:/var/www/html
+      - ~/data/wp:/var/www/html
     networks:
       - frontend
     tty: true
