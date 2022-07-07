@@ -38,4 +38,4 @@ expose-port:
 	echo net.ipv4.ip_unprivileged_port_start=0 >> /etc/sysctl.d/local.conf
 	sysctl --system
 
-.PHONY: build up down logs ps reload clean run
+.PHONY: reload build up down logs ps clean purge run expose-port
