@@ -1,12 +1,18 @@
 #!/bin/ash
 
-# TODO: healthcheck로 바꾸기
 wait_connection() {
-  while ! mysqladmin -h mariadb -u $DB_USER -p$DB_PASSWORD status; do
+  for run in $(seq 10); do
+    mysqladmin -h mariadb -u $DB_USER -p$DB_PASSWORD status
+    local result=$?
+    if [ "$result" -eq 0 ]; then
+      echo "[-] connection success."
+      return
+    fi
     echo "[-] waiting for connection..."
     sleep 3
   done
-  echo "[-] connection success."
+  echo "[-] connection failed. terminating..."
+  exit 1
 }
 
 echo "[-] symlinking php to php8"
