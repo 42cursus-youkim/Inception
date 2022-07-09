@@ -1,40 +1,40 @@
-# include srcs/.env
-
 NAME := inception
-
-COMPOSE := docker compose
 
 CONFIG := srcs/docker-compose.yml
 FLAGS := --project-name $(NAME) --file $(CONFIG)
-HOST := "127.0.0.1 youkim.42.fr"
+
+COMPOSE := docker compose $(FLAGS)
+
+VOLUME := $$HOME/data
+HOST := "127.0.0.1 $$USER.42.fr"
 
 reload: down build up
 
 build:
-	$(COMPOSE) $(FLAGS) build
+	$(COMPOSE) build
 
 up:
-	$(COMPOSE) $(FLAGS) up
+	$(COMPOSE) up
 
 down:
-	$(COMPOSE) $(FLAGS) down
+	$(COMPOSE) down
 
 logs:
-	$(COMPOSE) $(FLAGS) logs
+	$(COMPOSE) logs
 
 ps:
-	$(COMPOSE) $(FLAGS) ps
+	$(COMPOSE) ps
 
 clean:
-	$(COMPOSE) $(FLAGS) down --volumes --remove-orphans
+	$(COMPOSE) down --volumes --remove-orphans
 
 purge:
-	rm -rf ~/data/*
+	sudo rm -rf $(VOLUME)/*
 
 run: reload
 
 expose-port:
-	echo "127.0.0.1  youkim.42.fr" >> /etc/hosts
+	echo $(HOST) >> /etc/hosts
 	echo net.ipv4.ip_unprivileged_port_start=0 >> /etc/sysctl.d/local.conf
 	sysctl --system
 
