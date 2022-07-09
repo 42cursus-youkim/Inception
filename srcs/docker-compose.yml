@@ -1,5 +1,5 @@
 networks:
-  docker-network:
+  internal:
     driver: bridge
 
 services:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ~/data/mysql:/var/lib/mysql
     networks:
-      - docker-network
+      - internal
     env_file: mariadb.env
 
   wordpress:
@@ -24,7 +24,7 @@ services:
     expose:
       - 9000
     networks:
-      - docker-network
+      - internal
     env_file:
       - mariadb.env
       - wordpress.env
@@ -38,5 +38,5 @@ services:
     volumes:
       - ~/data/wp:/var/www/html
     networks:
-      - docker-network
+      - internal
     tty: true
