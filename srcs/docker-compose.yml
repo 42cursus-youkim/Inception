@@ -2,6 +2,21 @@ networks:
   internal:
     driver: bridge
 
+volumes:
+  mysql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_ROOT}/mysql
+
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_ROOT}/wordpress
+
 services:
   mariadb:
     container_name: mariadb
@@ -10,7 +25,7 @@ services:
     expose:
       - 3306
     volumes:
-      - ~/data/mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
     networks:
       - internal
     env_file: mariadb.env
@@ -20,7 +35,7 @@ services:
     build: srcs/requirements/wordpress
     restart: always
     volumes:
-      - ~/data/wp:/var/www/html
+      - wordpress:/var/www/html
     expose:
       - 9000
     networks:
@@ -36,7 +51,7 @@ services:
     ports:
       - 443:443
     volumes:
-      - ~/data/wp:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - internal
     tty: true
