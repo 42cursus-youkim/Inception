@@ -35,3 +35,16 @@ make: *** [Makefile:17: up] Error 1
 - 놀랍게도 `volumes`에서는 `~`가 치환되지 않음
 - 꺄아악
 
+## 네트워크
+
+### 도커에서 `bridge`란
+
+- 컨테이너들을 동일 브리지 네트워크에 연결, 연결된 컨테이너끼리만 통신 가능
+
+### 네트워크 드라이버들
+
+- `bridge`: 기본값
+- `host`: 호스트 머신의 네트워크를 사용
+- `overlay`: 여러 도커 데몬의 네트워크 연결
+
+[참고자료](https://docs.docker.com/network/#network-drivers)
