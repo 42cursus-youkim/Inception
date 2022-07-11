@@ -8,14 +8,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${VOLUME_ROOT}/mysql
+      device: ${VOLUME_MYSQL}
 
   wordpress:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${VOLUME_ROOT}/wordpress
+      device: ${VOLUME_WORDPRESS}
 
 services:
   mariadb:

@@ -1,3 +1,5 @@
+include srcs/.env
+
 NAME := inception
 
 CONFIG := srcs/docker-compose.yml
@@ -5,12 +7,13 @@ FLAGS := --project-name $(NAME) --file $(CONFIG)
 
 COMPOSE := docker compose $(FLAGS)
 
-VOLUME := $$HOME/data
+VOLUME := $(VOLUME_MYSQL) $(VOLUME_WORDPRESS)
 HOST := "127.0.0.1 $$USER.42.fr"
 
 reload: down build up
 
 build:
+	$(shell mkdir -p $(VOLUME))
 	$(COMPOSE) build
 
 up:
@@ -29,7 +32,7 @@ clean:
 	$(COMPOSE) down --volumes --remove-orphans
 
 purge:
-	sudo rm -rf $(VOLUME)/*
+	sudo rm -rf $(VOLUME)
 
 run: reload
 
