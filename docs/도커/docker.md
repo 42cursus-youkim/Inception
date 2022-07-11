@@ -17,12 +17,11 @@
 - 사용자 입력을 사용하기
 - `attach` 상태가 아니여도 쓸 수 있다!
 
-### `service "mariadb" is not running container #1`
 - `docker run -it` 모드로 실행해야 터미널에서 직접 실행 가능!
 - 도커 컴포즈에서는
   - `stdin_open: true` 가 `-i`
   - `tty: true` 가 `-t`
-- 꺄아악 여전히안댐
+
 ## `Port` vs `Expose`
 
 ### `Port`
